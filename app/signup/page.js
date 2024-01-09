@@ -21,7 +21,6 @@ const signup = () => {
   const handleSignUp = async () => {
     const { success, data } = await userSignUp(userData);
     if (success) {
-      console.log(data);
       setUser(data);
       router.push("/home");
     }

@@ -5,10 +5,16 @@ const url = process.env.NEXT_PUBLIC_BACKEND_URL;
 export const userSignUp = async (data) => {
   try {
     let result = (await axios.post(`${url}/auth/signup`, data)).data;
+
     if (result.success) {
-      localStorage.setItem("token", result.token);
+      localStorage.setItem("token", result.data.token);
     }
-    return { success: result.success, message: result.message, data: result };
+
+    return {
+      success: result.success,
+      message: result.message,
+      data: result.data._doc,
+    };
   } catch (error) {
     console.log("error", error);
     return { success: false, message: error.response.data.message };
